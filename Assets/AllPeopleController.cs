@@ -11,7 +11,6 @@ public class AllPeopleController : MonoBehaviour
     {
         foreach (Transform child in this.transform)
         {
-            Debug.Log(child.name);
             allPeople.Add(child.gameObject);
         }
     }

@@ -10,6 +10,7 @@ public class InventoryButtonInteractions : MonoBehaviour
     public void UpdateText()
     {
         itemText.text = this.gameObject.name;
+        //Debug.Log(this.name + " is getting updated to " + itemText.text);
     }
 
     public void Interact()
