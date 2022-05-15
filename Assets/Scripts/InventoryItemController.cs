@@ -11,4 +11,12 @@ public class InventoryItemController : MonoBehaviour
     {
         itemText.text = this.gameObject.name;
     }
+
+    public void Interact()
+    {
+        if (!MenuManager.Instance.inCharacterMode)
+        {
+            //TEL THE PLAYER TO GO INTO CHARACTER MODE
+        }
+    }
 }

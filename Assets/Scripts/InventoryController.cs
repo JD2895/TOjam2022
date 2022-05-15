@@ -12,7 +12,6 @@ public class InventoryController : MonoBehaviour
     {
         foreach (Transform child in inventoryItemContainer.transform)
         {
-            Debug.Log(child.name);
             if (child.gameObject.activeSelf)
             {
                 allInventoryItems.Add(child.gameObject);

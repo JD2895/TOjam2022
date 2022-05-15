@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MenuManager : MonoBehaviour
 {
     private int currentDosierTab = 0;
+    public bool inCharacterMode = false;
 
     public DossierController dossierController;
     public InfoController infoController;
     public BackgroundController backgroundController;
     public InventoryController inventoryController;
+    public AllPeopleController allPeopleController;
 
     private static MenuManager _instance;
 
@@ -33,6 +36,7 @@ public class MenuManager : MonoBehaviour
         }
 
         inventoryController.FillInventory();
+        allPeopleController.FillPeople();
     }
 
 
@@ -52,11 +56,18 @@ public class MenuManager : MonoBehaviour
 
     public void UpdateBackground(GameObject newBackground)
     {
+        if (inCharacterMode)
+            allPeopleController.DisableAllPeople();
         backgroundController.ChangeBackground(newBackground);
     }
 
     public void UpdateInventory(GameObject newInventoryItem)
     {
         inventoryController.UpdateInventory(newInventoryItem);
+    }
+
+    public void TogglePerson(GameObject newPeron)
+    {
+        allPeopleController.TogglePeople(newPeron);
     }
 }
