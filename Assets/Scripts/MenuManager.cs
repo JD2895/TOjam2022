@@ -13,6 +13,11 @@ public class MenuManager : MonoBehaviour
     public BackgroundController backgroundController;
     public InventoryController inventoryController;
     public AllPeopleController allPeopleController;
+    public GameObject interactablesContainer;
+
+    public GameObject choosePersonTip;
+    private int choosePersonTipCounter = 0;
+    public GameObject clueNotFoundTip;
 
     private static MenuManager _instance;
 
@@ -54,6 +59,18 @@ public class MenuManager : MonoBehaviour
         infoController.UpdateInfo(newText);
     }
 
+    public void FindItemUpdateInfoText(string itemToFind)
+    {
+        foreach (Transform child in interactablesContainer.transform)
+        {
+            if (child.name == itemToFind)
+            {
+                child.GetComponent<ItemButtonInteractions>().InteractText();
+                return;
+            }
+        }
+    }
+
     public void UpdateBackground(GameObject newBackground)
     {
         if (inCharacterMode)
@@ -69,10 +86,28 @@ public class MenuManager : MonoBehaviour
     public void TogglePerson(GameObject newPeron)
     {
         allPeopleController.TogglePeople(newPeron);
+        if (inCharacterMode)
+            ChangeDossierTab(1);
     }
 
     public void PersonItemInteraction(GameObject checkItem)
     {
         allPeopleController.PersonItemInteraction(checkItem);
+    }
+
+    public void ShowChoosePersonTip()
+    {
+        if (choosePersonTipCounter < 1)
+        {
+            choosePersonTipCounter += 1;
+            //ChangeDossierTab(0);
+            choosePersonTip.SetActive(true);
+        }
+    }
+
+    public void ShowClueNotFoundTip()
+    {
+        ChangeDossierTab(0);
+        clueNotFoundTip.SetActive(true);
     }
 }

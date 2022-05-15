@@ -15,16 +15,16 @@ public class InventoryButtonInteractions : MonoBehaviour
 
     public void Interact()
     {
-        if (!MenuManager.Instance.inCharacterMode)
+        if (itemText.text == "???")
         {
-            //TELl THE PLAYER TO GO INTO CHARACTER MODE
-            Debug.Log("GO TO CHARACTER PLS");
+            MenuManager.Instance.ShowClueNotFoundTip();
             return;
         }
 
-        if (itemText.text == "???")
+        if (!MenuManager.Instance.inCharacterMode)
         {
-            Debug.Log(this.name + " CLUE NOT FOUND! - " + itemText.text);
+            MenuManager.Instance.ShowChoosePersonTip();
+            MenuManager.Instance.FindItemUpdateInfoText(this.name);
             return;
         }
 
