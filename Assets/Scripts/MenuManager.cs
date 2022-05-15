@@ -31,6 +31,8 @@ public class MenuManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        inventoryController.FillInventory();
     }
 
 

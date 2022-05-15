@@ -8,6 +8,14 @@ public class ItemButtonInteractions : MonoBehaviour
     public GameObject interactScene;
     public GameObject inventoryItem;
 
+    public void Start()
+    {
+        if (interactText == "")
+        {
+            interactText = this.name + " HAS NO INTERACT TEXT";
+        }
+    }
+
     public void InteractText()
     {
         MenuManager.Instance.UpdateInfoText(interactText);
