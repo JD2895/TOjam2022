@@ -70,4 +70,9 @@ public class MenuManager : MonoBehaviour
     {
         allPeopleController.TogglePeople(newPeron);
     }
+
+    public void PersonItemInteraction(GameObject checkItem)
+    {
+        allPeopleController.PersonItemInteraction(checkItem);
+    }
 }

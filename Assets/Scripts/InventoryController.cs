@@ -32,7 +32,7 @@ public class InventoryController : MonoBehaviour
             {
                 if (allInventoryItems[i] == newInventoryItem)
                 {
-                    newInventoryItem.GetComponent<InventoryItemController>().UpdateText();
+                    newInventoryItem.GetComponent<InventoryButtonInteractions>().UpdateText();
                 }
                     //allInventoryItems[i].SetActive(true);
             }

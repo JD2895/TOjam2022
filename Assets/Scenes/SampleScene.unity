@@ -10756,11 +10756,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCharacterMode: 0
-  peopleContainer: {fileID: 0}
   dossierController: {fileID: 1609865462}
   infoController: {fileID: 106477526}
   backgroundController: {fileID: 909206788}
   inventoryController: {fileID: 1353128574}
+  allPeopleController: {fileID: 1699828712}
 --- !u!1 &1257903349
 GameObject:
   m_ObjectHideFlags: 0
@@ -11482,7 +11482,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1357863168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11516,6 +11516,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ddf5c59fd083642b0d30430f9f97f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemResponses:
+  - item: {fileID: 2035861474}
+    response: Wasn't me
+  - item: {fileID: 1598271679}
+    response: I can read!\nWait did I say can? I meant can't.\nIs that what can't
+      means?
+  - item: {fileID: 0}
+    response: 
+  - item: {fileID: 0}
+    response: 
+  - item: {fileID: 0}
+    response: 
 --- !u!1 &1380386521
 GameObject:
   m_ObjectHideFlags: 0
@@ -12694,6 +12706,7 @@ GameObject:
   - component: {fileID: 1553088056}
   - component: {fileID: 1553088055}
   - component: {fileID: 1553088054}
+  - component: {fileID: 1553088057}
   m_Layer: 5
   m_Name: Reese
   m_TagString: Untagged
@@ -12764,7 +12777,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1553088055}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1553088057}
+        m_TargetAssemblyTypeName: PersonButtonInteractions, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1553088055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12803,6 +12828,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553088052}
   m_CullTransparentMesh: 1
+--- !u!114 &1553088057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553088052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acafe66d63e970f4880bd1c25ff19920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactText: 
+  personLeavingText: 
+  personObject: {fileID: 1357863167}
 --- !u!1001 &1592888659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13550,6 +13590,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1699828711}
+  - component: {fileID: 1699828712}
   m_Layer: 5
   m_Name: PEOPLE
   m_TagString: Untagged
@@ -13577,6 +13618,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1699828712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699828710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96d56d55d462934ab58440b98ab7c83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1714089537
 GameObject:
   m_ObjectHideFlags: 0

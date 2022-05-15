@@ -5,16 +5,14 @@ using UnityEngine;
 public class AllPeopleController : MonoBehaviour
 {
     private List<GameObject> allPeople = new List<GameObject>();
+    private PersonController currentPersonController;
 
     public void FillPeople()
     {
         foreach (Transform child in this.transform)
         {
             Debug.Log(child.name);
-            if (child.gameObject.activeSelf)
-            {
-                allPeople.Add(child.gameObject);
-            }
+            allPeople.Add(child.gameObject);
         }
     }
 
@@ -22,7 +20,7 @@ public class AllPeopleController : MonoBehaviour
     {
         if (!allPeople.Contains(personToToggle))
         {
-            Debug.LogError("No peron found for: " + personToToggle.name);
+            Debug.LogError("No person found for: " + personToToggle.name);
             return;
         }
         else
@@ -32,7 +30,17 @@ public class AllPeopleController : MonoBehaviour
                 if (allPeople[i].name == personToToggle.name)
                 {
                     allPeople[i].SetActive(!allPeople[i].activeSelf);
-                    MenuManager.Instance.inCharacterMode = allPeople[i].activeSelf;
+                    //MenuManager.Instance.inCharacterMode = allPeople[i].activeSelf;
+                    if (allPeople[i].activeSelf)
+                    {
+                        MenuManager.Instance.inCharacterMode = true;
+                        currentPersonController = allPeople[i].GetComponent<PersonController>();
+                    }
+                    else
+                    {
+                        MenuManager.Instance.inCharacterMode = false;
+                        currentPersonController = null;
+                    }
                 }
                 else
                     allPeople[i].SetActive(false);
@@ -46,5 +54,25 @@ public class AllPeopleController : MonoBehaviour
         {
             allPeople[i].SetActive(false);
         }
+        MenuManager.Instance.inCharacterMode = false;
+    }
+
+    public void PersonItemInteraction(GameObject checkItem)
+    {
+        if (currentPersonController == null)
+        {
+            Debug.LogError("Can't interact with person, is null");
+            return;
+        }
+
+        string response = currentPersonController.GetResponse(checkItem);
+
+        if (response == null)
+        {
+            Debug.LogError(currentPersonController.transform.name + "doesn't have a response for " + checkItem.name);
+            return;
+        }
+
+        MenuManager.Instance.UpdateInfoText(response);
     }
 }
