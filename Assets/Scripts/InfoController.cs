@@ -11,5 +11,6 @@ public class InfoController : MonoBehaviour
     {
         newText = newText.Replace("\\n", "\n");
         infoText.text = newText;
+        AudioManager.Instance.PageFlip();
     }
 }

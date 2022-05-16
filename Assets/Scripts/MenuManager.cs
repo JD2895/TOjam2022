@@ -13,11 +13,16 @@ public class MenuManager : MonoBehaviour
     public BackgroundController backgroundController;
     public InventoryController inventoryController;
     public AllPeopleController allPeopleController;
-    public GameObject interactablesContainer;
+    public GameObject kitchenInteractablesContainer;
+    public GameObject fridgeInteractablesContainer;
+    public GameObject endObject;
 
     public GameObject choosePersonTip;
     private int choosePersonTipCounter = 0;
     public GameObject clueNotFoundTip;
+
+    public GameObject[] introObjects;
+    public bool skipIntro = false;
 
     private static MenuManager _instance;
 
@@ -42,14 +47,26 @@ public class MenuManager : MonoBehaviour
 
         inventoryController.FillInventory();
         allPeopleController.FillPeople();
+        
+        if (!skipIntro)
+            ShowIntroWindows();
     }
 
+    public void ShowIntroWindows()
+    {
+        AudioManager.Instance.PageFlip();
+        foreach (GameObject obj in introObjects)
+        {
+            obj.SetActive(true);
+        }
+    }
 
     public void ChangeDossierTab(int tabChoice)
     {
         if (currentDosierTab == tabChoice)
             return;
 
+        AudioManager.Instance.PageFlip();
         dossierController.ChangeDossierTab(tabChoice);
         currentDosierTab = tabChoice;
     }
@@ -61,7 +78,7 @@ public class MenuManager : MonoBehaviour
 
     public void FindItemUpdateInfoText(string itemToFind)
     {
-        foreach (Transform child in interactablesContainer.transform)
+        foreach (Transform child in kitchenInteractablesContainer.transform)
         {
             if (child.name == itemToFind)
             {
@@ -69,6 +86,17 @@ public class MenuManager : MonoBehaviour
                 return;
             }
         }
+
+        foreach (Transform child in fridgeInteractablesContainer.transform)
+        {
+            if (child.name == itemToFind)
+            {
+                child.GetComponent<ItemButtonInteractions>().InteractText();
+                return;
+            }
+        }
+
+        Debug.Log("not found");
     }
 
     public void UpdateBackground(GameObject newBackground)
@@ -107,7 +135,23 @@ public class MenuManager : MonoBehaviour
 
     public void ShowClueNotFoundTip()
     {
+        AudioManager.Instance.PageFlip();
         ChangeDossierTab(0);
         clueNotFoundTip.SetActive(true);
+    }
+
+    public void ShowEnd()
+    {
+        AudioManager.Instance.PageFlip();
+        endObject.SetActive(true);
+    }
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
     }
 }
