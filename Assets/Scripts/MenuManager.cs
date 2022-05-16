@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     private int currentDosierTab = 0;
     public bool inCharacterMode = false;
+    public GameObject currentPersonObject;
 
     public DossierController dossierController;
     public InfoController infoController;
@@ -111,9 +112,10 @@ public class MenuManager : MonoBehaviour
         inventoryController.UpdateInventory(newInventoryItem);
     }
 
-    public void TogglePerson(GameObject newPeron)
+    public void TogglePerson(GameObject newPerson)
     {
-        allPeopleController.TogglePeople(newPeron);
+        currentPersonObject = newPerson;
+        allPeopleController.TogglePeople(newPerson);
         if (inCharacterMode)
             ChangeDossierTab(1);
     }

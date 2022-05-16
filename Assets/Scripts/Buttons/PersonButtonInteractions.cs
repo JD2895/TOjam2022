@@ -23,9 +23,16 @@ public class PersonButtonInteractions : MonoBehaviour
     public void Interact()
     {
         if (!MenuManager.Instance.inCharacterMode)
+        {
             MenuManager.Instance.UpdateInfoText(interactText);
+        }
         else
-            MenuManager.Instance.UpdateInfoText(personLeavingText);
+        {
+            if (MenuManager.Instance.currentPersonObject == personObject)
+                MenuManager.Instance.UpdateInfoText(personLeavingText);
+            else
+                MenuManager.Instance.UpdateInfoText(interactText);
+        }
         MenuManager.Instance.TogglePerson(personObject);
     }
 }
